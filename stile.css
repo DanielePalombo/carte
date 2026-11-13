@@ -7,6 +7,9 @@
   --mattonella: 22px;
   --gap: 12px;
   --alto: max(var(--gap), env(safe-area-inset-top));
+  --lato: max(var(--gap), env(safe-area-inset-left), env(safe-area-inset-right));
+  /* Grandezza delle carte rispetto allo spazio disponibile (1 = il massimo che ci sta). */
+  --scala-carte: 0.85;
   --fascia-spia: calc(var(--mattonella) * 3);
   --rosso: #b0131c;
   --rosso-chiaro: #d23a40;
@@ -37,7 +40,7 @@ html, body {
   display: grid;
   place-items: center;
   /* In basso resta una fascia di panno libera dove sta la spia. */
-  padding: var(--alto) var(--gap) var(--fascia-spia);
+  padding: var(--alto) var(--lato) var(--fascia-spia);
   background-color: var(--verde);
   background-image:
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 22 22'%3E%3Cpath d='M11 7v8M7 11h8' stroke='white' stroke-opacity='0.07' stroke-width='1.6' stroke-linecap='round'/%3E%3C/svg%3E"),
@@ -62,16 +65,27 @@ html, body {
 [data-spia="pronto"] .spia { display: block; left: calc(var(--mattonella) * 2); }
 [data-spia="cambio"] .spia { display: block; right: calc(var(--mattonella) * 2); }
 
-/* ---------- Mano: griglia 2 × 3 ---------- */
+/* ---------- Mano: griglia 2 × 3 in verticale, 3 × 2 in orizzontale ---------- */
 
 .griglia {
-  --w: min(
-    (100vw - 3 * var(--gap)) / 2,
-    (100dvh - var(--alto) - var(--fascia-spia) - 2 * var(--gap)) / 3 * 2 / 3
-  );
+  --colonne: 2;
+  --righe: 3;
+  /* Larghezza di una carta: la più grande che ci sta sia in larghezza sia in altezza
+     (le carte sono 2:3), ridotta di --scala-carte. */
+  --w: calc(var(--scala-carte) * min(
+    (100vw - 2 * var(--lato) - (var(--colonne) - 1) * var(--gap)) / var(--colonne),
+    (100dvh - var(--alto) - var(--fascia-spia) - (var(--righe) - 1) * var(--gap)) / var(--righe) * 2 / 3
+  ));
   display: grid;
-  grid-template-columns: repeat(2, var(--w));
+  grid-template-columns: repeat(var(--colonne), var(--w));
   gap: var(--gap);
+}
+
+@media (orientation: landscape) {
+  .griglia {
+    --colonne: 3;
+    --righe: 2;
+  }
 }
 
 .carta {

@@ -73,22 +73,13 @@ async function avviaSensore() {
   });
 }
 
-// ---------- Schermo intero, verticale, schermo sempre acceso ----------
+// ---------- Schermo intero e schermo sempre acceso ----------
 
 function schermoIntero() {
   const installata = matchMedia('(display-mode: fullscreen), (display-mode: standalone)').matches;
   if (!installata && !document.fullscreenElement && document.documentElement.requestFullscreen) {
-    document.documentElement
-      .requestFullscreen({ navigationUI: 'hide' })
-      .then(bloccaVerticale, () => {});
-  } else {
-    bloccaVerticale();
+    document.documentElement.requestFullscreen({ navigationUI: 'hide' }).catch(() => {});
   }
-}
-
-function bloccaVerticale() {
-  const orientamento = /** @type {any} */ (screen.orientation);
-  orientamento?.lock?.('portrait').catch(() => {});
 }
 
 /** @type {WakeLockSentinel | null} */

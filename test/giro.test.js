@@ -109,3 +109,21 @@ test('telefono ribaltato in avanti passando per la posizione piatta (senza girar
   for (let beta = 80; beta >= -80; beta -= 5) letture.push({ alpha: 30, beta, gamma: 0 });
   assert.equal(giroRilevato(letture), false);
 });
+
+test('telefono tenuto in orizzontale (di lato), ruotato di 160°: giro rilevato', () => {
+  assert.equal(giroRilevato(gesto([0, 160], 80, 88)), true);
+});
+
+test('telefono in orizzontale, ruotato di 140°: nessun giro', () => {
+  assert.equal(giroRilevato(gesto([0, 140], 80, 88)), false);
+});
+
+test('in orizzontale con il rollio che oscilla attorno a 90° (gli angoli del browser saltano): giro rilevato solo oltre la soglia', () => {
+  const letture = (fino) => {
+    const l = [];
+    for (let y = 0; y <= fino; y += 5) l.push(lettura(y, 80, y % 10 === 0 ? 85 : 95));
+    return l;
+  };
+  assert.equal(giroRilevato(letture(160)), true);
+  assert.equal(giroRilevato(letture(140)), false);
+});
