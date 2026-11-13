@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <pattern id="rete" width="28" height="28" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="28" height="28" fill="#b0131c"/>
+      <path d="M0 0h28M0 0v28" stroke="#d23a40" stroke-width="5"/>
+    </pattern>
+  </defs>
+  <rect width="512" height="512" fill="#0f4a2c"/>
+  <rect x="116" y="56" width="280" height="400" rx="28" fill="#fbfaf6"/>
+  <rect x="140" y="80" width="232" height="352" rx="16" fill="url(#rete)"/>
+</svg>

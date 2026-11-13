@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Carte</title>
+  <meta name="theme-color" content="#0d3b24">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Carte">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icone/icona-192.png">
+  <link rel="apple-touch-icon" href="icone/icona-180.png">
+  <link rel="stylesheet" href="stile.css">
+  <script type="module" src="src/app.js"></script>
+</head>
+<body data-schermata="dorso" data-spia="nessuna">
+  <main class="panno">
+    <div class="griglia" aria-label="Carte">
+      <img class="carta" alt="" draggable="false">
+      <img class="carta" alt="" draggable="false">
+      <img class="carta" alt="" draggable="false">
+      <img class="carta" alt="" draggable="false">
+      <img class="carta" alt="" draggable="false">
+      <img class="carta" alt="" draggable="false">
+    </div>
+    <div class="spia" aria-hidden="true"></div>
+  </main>
+  <div class="dorso" aria-label="Mazzo"><div class="dorso-interno"></div></div>
+</body>
+</html>
